@@ -58,11 +58,16 @@ async function run() {
       console.log(result);
       res.send(result);
     });
-    
-    app.delete('/coffee/:id',async (req, res) => {
+
+    app.delete("/coffee/:id", async (req, res) => {
       const _id = req.params.id;
-      const query = 
-    })
+      const query = {
+        _id: new ObjectId(_id),
+      };
+
+      const result = await coffeeCollection.deleteOne(query);
+      res.send(result);
+    });
     // insert into databasde
     app.post("/add", async (req, res) => {
       const coffee = req.body;
