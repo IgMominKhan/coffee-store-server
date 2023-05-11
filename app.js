@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, ObjectId, ServerApiVersion } from "mongodb";
 
 var app = express();
 
@@ -46,6 +46,18 @@ async function run() {
       res.send(result);
     });
 
+    // return a single data
+    app.get("/coffee/:id", async (req, res) => {
+      const _id = req.params.id;
+
+      const query = {
+        _id: new ObjectId(_id),
+      };
+
+      const result = await coffeeCollection.findOne(query);
+      console.log(result);
+      res.send(result);
+    });
     // insert into databasde
     app.post("/add", async (req, res) => {
       const coffee = req.body;
