@@ -68,6 +68,7 @@ async function run() {
       const result = await coffeeCollection.deleteOne(query);
       res.send(result);
     });
+
     // insert into databasde
     app.post("/add", async (req, res) => {
       const coffee = req.body;
